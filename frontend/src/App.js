@@ -8,7 +8,7 @@ import Root from "./Pages/Root";
 import Home from "./Pages/Home/Home";
 import Cart from "./Pages/Carts/Cart";
 import NotFoundthem from "./Pages/NotFoundthem";
-import Products from "./Components/products";
+import Products from "./Components/Myproducts";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />}>

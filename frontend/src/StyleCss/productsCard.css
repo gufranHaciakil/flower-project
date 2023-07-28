@@ -1,0 +1,5 @@
+.productsCard:hover {
+  transition: 0.2s;
+  scale: 1.02;
+  cursor: pointer;
+}
