@@ -6,12 +6,12 @@ import "../StyleCss/Aboutsite.css"
 const AboutSite = () => {
   const theeme = useTheme()
   return (
-    <Box>
+    <Box mt={-4}>
       <Stack component="main" sx={{
         justifyContent: "space-around",
         alignItems: "center",
         bgcolor: theeme.palette.appBarbg.bgcolor,
-        height: '92vh',
+        height: '100vh',
       }}>
         <Box className='anim' component="section" sx={{ width: { xs: "350px", md: "570px" }, display: "flex", flexDirection: "column", gap: "20px", mt: "-150px" }}>
           <Typography variant="h3" sx={{ fontWeight: "400" }}>Welcome to our <br /> Gift Shop</Typography>

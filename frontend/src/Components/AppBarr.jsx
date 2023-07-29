@@ -16,7 +16,6 @@ import IconButton from "@mui/material/IconButton";
 import {
   Adb,
   Person3,
-  Settings,
   ShoppingCart,
 
 } from "@mui/icons-material";
@@ -87,7 +86,15 @@ const AppBarr = ({ setmyThem }) => {
 
   return (
     <>
-      <AppBar position="static" sx={{ height: "50px", bgcolor: theem.palette.appBarbg.main }}>
+      <AppBar position="static" sx={{
+        height: "50px", bgcolor: theem.palette.appBarbg.main,
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        right: '0',
+        bottom: '0',
+        zIndex: '5',
+      }}>
         <Container maxWidth="xl" sx={{ bgcolor: theem.palette.appBarbg.main }}>
           <Toolbar disableGutters sx={{
             justifyContent: { xs: "space-between", lg: "center" },

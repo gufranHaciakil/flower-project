@@ -13,8 +13,11 @@ import { Box, Stack } from '@mui/material';
 import { useGetproductsByNameQuery } from '../Redux/productsApi'
 import CircularProgress from '@mui/material/CircularProgress';
 import "../StyleCss/productsCard.css"
+import { useDispatch } from 'react-redux';
+import { addToCard } from '../Redux/CartSlice';
 const Myproducts = () => {
   const theeme = useTheme();
+  const dispatch = useDispatch()
 
   const { data, error, isLoading } = useGetproductsByNameQuery()
   if (error) {
@@ -32,10 +35,11 @@ const Myproducts = () => {
 
   if (data) {
     return (
-      <Stack direction={"row"} sx={{
+      <Stack mt={-3} direction={"row"} sx={{
         flexWrap: 'wrap',
         gap: '10px',
         justifyContent: "center",
+        mb: "70px"
       }}>
         {data.map((item) => {
           return (
@@ -70,7 +74,13 @@ const Myproducts = () => {
 
                 </Box>
 
-                <IconButton sx={{}} onClick={() => { }}>
+                <IconButton sx={{}} onClick={() => {
+
+
+
+                  dispatch(addToCard(item))
+
+                }}>
                   <ShoppingCart fontSize='small' sx={{}} />
                 </IconButton>
 
