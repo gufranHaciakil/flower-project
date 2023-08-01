@@ -1,25 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+//import { json } from 'express'
 
 const initialState = {
-  selectedProducts: [
-    {
-      "id": 3,
-      "productName": "Yellow flowers",
-      "price": 300,
-      "imageLink": "https://res.cloudinary.com/ddgwtjty8/image/upload/v1690552957/samples/My%20Flower%20online%20Store/4_jywwrc.jpg",
-      "quanyity": 1,
-    },
-
-    {
-      "id": 4,
-      "productName": "violet flowers",
-      "price": 400,
-      "imageLink": "https://res.cloudinary.com/ddgwtjty8/image/upload/v1690552955/samples/My%20Flower%20online%20Store/1_zo8lj2.jpg",
-      "quantity": 1,
-    }
-
-
-  ],
+  selectedProducts: localStorage.getItem("selectedProducts") ? JSON.parse(localStorage.getItem("selectedProducts")) : [],
 }
 
 export const counterSlice = createSlice({
@@ -27,16 +10,44 @@ export const counterSlice = createSlice({
   initialState,
   reducers: {
     addToCard: (state, action) => {
-      console.log("doneeeeee")
+
+      const productsWithQuantity = { ...action.payload, "quantity": 1 }
+      state.selectedProducts.push(productsWithQuantity)
+      localStorage.setItem("selectedProducts", JSON.stringify(state.selectedProducts))
+
     },
     increaseQuantity: (state, action) => {
-      console.log("doneeeeee1")
+      const increasedProduct = state.selectedProducts.find((item) => {
+        return item.id === action.payload.id
+      })
+      increasedProduct.quantity += 1
+      localStorage.setItem("selectedProducts", JSON.stringify(state.selectedProducts))
+
+
+
     },
     decreaseQuantity: (state, action) => {
-      console.log("doneeeeee2")
+
+      const decreaseedProduct = state.selectedProducts.find((item) => {
+        return item.id === action.payload.id
+      })
+
+      if (decreaseedProduct.quantity > 1) {
+        decreaseedProduct.quantity -= 1
+      } else {
+      }
+
+      localStorage.setItem("selectedProducts", JSON.stringify(state.selectedProducts))
+
+
     },
     deleteProduct: (state, action) => {
-      console.log("doneeeeee3")
+      const newArry = state.selectedProducts.filter((item) => {
+        return item.id !== action.payload.id
+      })
+      state.selectedProducts = newArry
+      localStorage.setItem("selectedProducts", JSON.stringify(state.selectedProducts))
+
     },
   },
 })

@@ -6,6 +6,9 @@ import { decreaseQuantity, deleteProduct, increaseQuantity } from "../../Redux/C
 
 
 const Cart = () => {
+
+
+
   const themee = useTheme()
   const { selectedProducts } = useSelector((state) => state.Cartt)
   const dispatch = useDispatch()
@@ -17,13 +20,15 @@ const Cart = () => {
       backgroundColor: themee.palette.success.main,
     },
   }));
-
+  let Suptotal = 0
   return (
-    <Stack mt={12} mb={12}>
+    <Stack mt={12} mb={12} sx={{ alignItems: "center" }}>
 
       {selectedProducts.map((item) => {
+        Suptotal += item.price * item.quantity
+
         return (
-          <Stack key={item.id} direction={"row"} component="section" sx={{
+          <Stack Stack key={item.id} direction={"row"} component="section" sx={{
             justifyContent: "center",
             alignItems: "center",
             padding: "0 30px",
@@ -37,6 +42,7 @@ const Cart = () => {
             backdropFilter: 'blur( 12.5px )',
             webkitBackdropFilter: 'blur( 12.5px )',
             mb: "20px",
+            overflowX: "hidden"
 
           }}>
             <img alt="hyy" width={'193px'} style={{ borderRadius: "7px" }} src={item.imageLink} />
@@ -55,14 +61,14 @@ const Cart = () => {
                 }}>
                   <HorizontalRule />
                 </IconButton>
-                <StyledBadge badgeContent={4} color="primary">
+                <StyledBadge badgeContent={item.quantity} color="primary">
                 </StyledBadge>
                 <IconButton onClick={() => {
                   dispatch(increaseQuantity(item))
                 }} >
                   <Add />
                 </IconButton>
-                <Typography variant="p" > ${item.price} </Typography>
+                <Typography variant="p" > ${item.price * item.quantity} </Typography>
               </Stack>
 
               <Button variant="text" color="error" sx={{ display: { xs: "none", md: "block" } }} onClick={() => {
@@ -76,7 +82,6 @@ const Cart = () => {
               </IconButton>
 
             </Stack>
-
           </Stack>
         )
       })}
@@ -102,14 +107,14 @@ const Cart = () => {
 
         }}>
           <Typography variant="h6" >Suptotal</Typography>
-          <Typography variant="h6" color={themee.palette.success.main} >$20</Typography>
+          <Typography variant="h6" color={themee.palette.success.main} >${Suptotal}</Typography>
         </Stack>
         <Button variant="contained" color="warning" size="small">
           checkout
         </Button>
 
       </Stack >
-    </Stack>
+    </Stack >
   );
 }
 

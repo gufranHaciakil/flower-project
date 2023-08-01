@@ -1,6 +1,7 @@
 import {
   AppBar,
   Avatar,
+  Badge,
   Box,
   Button,
   Container,
@@ -15,6 +16,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import {
   Adb,
+  Mail,
   Person3,
   ShoppingCart,
 
@@ -25,12 +27,15 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import React from "react";
 import styled from "@emotion/styled";
+import { useSelector } from "react-redux";
 
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const AppBarr = ({ setmyThem }) => {
   const theem = useTheme();
+  const { selectedProducts } = useSelector((state) => state.Cartt)
+
 
   const ColorButton = styled(Button)(({ theem }) => ({
     color: theem.palette.getContrastText('#483D8B'),
@@ -68,17 +73,17 @@ const AppBarr = ({ setmyThem }) => {
     },
     {
       text: "Product",
-      icon: <product />,
       path: "/product",
     },
     {
-      text: "Cart",
-      icon: <ShoppingCart />,
+      ShoppingIcon: 
+      <Badge badgeContent={selectedProducts.length} color="success">
+        <ShoppingCart color="action" />
+      </Badge>,
       path: "/cart",
     },
     {
       text: "Profile",
-      icon: <Person3 />,
       path: "/profile",
     },
   ];
@@ -135,12 +140,14 @@ const AppBarr = ({ setmyThem }) => {
                 }}
               >
                 {pages.map((page) => (
-                  <MenuItem key={page.text} onClick={() => {
+                  <MenuItem key={page.path} onClick={() => {
                     navigate(page.path)
-
                     handleCloseNavMenu()
                   }}>
                     <Typography textAlign="center">{page.text}</Typography>
+
+                    {page.ShoppingIcon}
+
                   </MenuItem>
                 ))}
               </Menu>
@@ -152,15 +159,22 @@ const AppBarr = ({ setmyThem }) => {
 
               {pages.map((page) => (
                 <Button
-                  key={page.text}
+                  key={page.path}
                   onClick={() => {
                     navigate(page.path)
                     handleCloseNavMenu()
                   }}
                   sx={{ my: 2, color: 'white', display: 'block', fontSize: "17px" }}
                 >
+
+
+
                   {page.text}
+                  {page.ShoppingIcon}
+
+
                 </Button>
+
               ))}
 
             </Box>

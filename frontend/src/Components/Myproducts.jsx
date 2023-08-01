@@ -7,17 +7,19 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import { ShoppingCart } from "@mui/icons-material";
+import { AddShoppingCart, AssignmentTurnedIn, Done, ShoppingCart } from "@mui/icons-material";
 import { useTheme } from "@emotion/react";
-import { Box, Stack } from '@mui/material';
+import { Badge, Box, Stack } from '@mui/material';
 import { useGetproductsByNameQuery } from '../Redux/productsApi'
 import CircularProgress from '@mui/material/CircularProgress';
 import "../StyleCss/productsCard.css"
 import { useDispatch } from 'react-redux';
 import { addToCard } from '../Redux/CartSlice';
+import { useNavigate } from 'react-router-dom';
 const Myproducts = () => {
   const theeme = useTheme();
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { data, error, isLoading } = useGetproductsByNameQuery()
   if (error) {
@@ -53,6 +55,9 @@ const Myproducts = () => {
                 height="194"
                 image={item.imageLink}
                 alt="Paella dish"
+                onClick={() => {
+                  navigate(`/product-detailse/${item.id}`)
+                }}
               />
               <CardContent sx={{ display: "flex" }}>
                 <Typography flexGrow={1} variant="body2" color="text.secondary">
@@ -71,18 +76,27 @@ const Myproducts = () => {
                   <IconButton aria-label="share">
                     <ShareIcon />
                   </IconButton>
-
                 </Box>
 
-                <IconButton sx={{}} onClick={() => {
 
 
+                {/* ADD CARD BUTTON */}
 
-                  dispatch(addToCard(item))
+                {false ?
+                  (
+                    <Badge badgeContent={<Done fontSize="medium" color="success" sx={{ mr: "50px" }} />}>
+                      <ShoppingCart color='success' />
+                    </Badge>
+                  )
+                  :
+                  (<IconButton sx={{}} onClick={() => {
+                    dispatch(addToCard(item))
+                  }}>
+                    <AddShoppingCart fontSize='medium' sx={{}} color='action' />
+                  </IconButton>)
+                }
 
-                }}>
-                  <ShoppingCart fontSize='small' sx={{}} />
-                </IconButton>
+
 
               </CardActions>
             </Card >
