@@ -7,8 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
-import { AddShoppingCart, AssignmentTurnedIn, Done, ShoppingCart } from "@mui/icons-material";
-import { useTheme } from "@emotion/react";
+import { AddShoppingCart, Done, ShoppingCart } from "@mui/icons-material";
 import { Badge, Box, Stack } from '@mui/material';
 import { useGetproductsByNameQuery } from '../Redux/productsApi'
 import CircularProgress from '@mui/material/CircularProgress';
@@ -17,7 +16,6 @@ import { useDispatch } from 'react-redux';
 import { addToCard } from '../Redux/CartSlice';
 import { useNavigate } from 'react-router-dom';
 const Myproducts = () => {
-  const theeme = useTheme();
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -95,8 +93,6 @@ const Myproducts = () => {
                     <AddShoppingCart fontSize='medium' sx={{}} color='action' />
                   </IconButton>)
                 }
-
-
 
               </CardActions>
             </Card >
