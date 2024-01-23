@@ -16,8 +16,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import IconButton from "@mui/material/IconButton";
 import {
   Adb,
-  Mail,
-  Person3,
   ShoppingCart,
 
 } from "@mui/icons-material";
@@ -26,7 +24,6 @@ import { useTheme } from "@emotion/react";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import React from "react";
-import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
 
 
@@ -37,13 +34,13 @@ const AppBarr = ({ setmyThem }) => {
   const { selectedProducts } = useSelector((state) => state.Cartt)
 
 
-  const ColorButton = styled(Button)(({ theem }) => ({
-    color: theem.palette.getContrastText('#483D8B'),
-    backgroundColor: theem.palette.gufran.main,
-    "&:hover": {
-      backgroundColor: theem.palette.onHover.main,
-    },
-  }));
+  // const ColorButton = styled(Button)(({ theem }) => ({
+  //   color: theem.palette.getContrastText('#483D8B'),
+  //   backgroundColor: theem.palette.gufran.main,
+  //   "&:hover": {
+  //     backgroundColor: theem.palette.onHover.main,
+  //   },
+  // }));
 
 
   const navigate = useNavigate();

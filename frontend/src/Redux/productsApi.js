@@ -1,7 +1,6 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-
 // get all product
 export const productsApi = createApi({
   reducerPath: "productsApi",
@@ -22,7 +21,6 @@ export const oneProductApi = createApi({
     }),
   }),
 });
-
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
